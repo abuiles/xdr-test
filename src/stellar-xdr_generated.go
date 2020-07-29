@@ -220,25 +220,25 @@ var (
 //
 //   typedef AccountID* SponsorshipDescriptor;
 //
-type SponsorshipDescriptor AccountId
+type SponsorshipDescriptor *AccountId
 
 // MarshalBinary implements encoding.BinaryMarshaler.
-func (s SponsorshipDescriptor) MarshalBinary() ([]byte, error) {
-	b := new(bytes.Buffer)
-	_, err := Marshal(b, s)
-	return b.Bytes(), err
-}
+// func (s SponsorshipDescriptor) MarshalBinary() ([]byte, error) {
+// 	b := new(bytes.Buffer)
+// 	_, err := Marshal(b, s)
+// 	return b.Bytes(), err
+// }
 
 // UnmarshalBinary implements encoding.BinaryUnmarshaler.
-func (s *SponsorshipDescriptor) UnmarshalBinary(inp []byte) error {
-	_, err := Unmarshal(bytes.NewReader(inp), s)
-	return err
-}
+// func (s *SponsorshipDescriptor) UnmarshalBinary(inp []byte) error {
+// 	_, err := Unmarshal(bytes.NewReader(inp), s)
+// 	return err
+// }
 
-var (
-	_ encoding.BinaryMarshaler   = (*SponsorshipDescriptor)(nil)
-	_ encoding.BinaryUnmarshaler = (*SponsorshipDescriptor)(nil)
-)
+// var (
+// 	_ encoding.BinaryMarshaler   = (*SponsorshipDescriptor)(nil)
+// 	_ encoding.BinaryUnmarshaler = (*SponsorshipDescriptor)(nil)
+// )
 
 // AccountEntryExtensionV2 is an XDR Struct defines as:
 //
@@ -249,8 +249,8 @@ var (
 //    };
 //
 type AccountEntryExtensionV2 struct {
-	SignerSponsoringIDs []*SponsorshipDescriptor `xdrmaxsize:"2"`
-	SponsoringId        *SponsorshipDescriptor
+	SignerSponsoringIDs []SponsorshipDescriptor `xdrmaxsize:"2"`
+	SponsoringId        SponsorshipDescriptor
 }
 
 // MarshalBinary implements encoding.BinaryMarshaler.
